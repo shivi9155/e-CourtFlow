@@ -1,0 +1,76 @@
+
+@import "tailwindcss";
+
+/* Light theme variables (default) */
+body.theme-light {
+	--bg: #F8FAFC;
+	--surface: #FFFFFF;
+	--muted: #6B7280;
+	--primary: #0F1724;
+	--accent: #E6E9EC;
+	--brand: #0B1220;
+}
+
+/* Dark / monochrome theme */
+body.theme-dark {
+	--bg: #0B1220;
+	--surface: #0F1724;
+	--muted: #94A3B8;
+	--primary: #ECEFF4;
+	--accent: #121827;
+	--brand: #0B1220;
+}
+
+html, body, #root { height: 100%; }
+
+body {
+	background: var(--bg);
+	color: var(--primary);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Flat 2D navbar */
+.navbar {
+	background: var(--brand);
+	color: white;
+	box-shadow: none;
+	border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Hero and page sections: simple, flat */
+.hero { background: transparent; color: var(--primary); }
+
+.card {
+	background: var(--surface);
+	border: 1px solid var(--accent);
+	box-shadow: none;
+	border-radius: 8px;
+}
+
+.muted { color: var(--muted); }
+
+.btn-primary {
+	background: var(--brand);
+	color: white;
+	padding: .55rem 1rem;
+	border-radius: 6px;
+	border: 1px solid rgba(0,0,0,0.06);
+}
+
+.btn-ghost {
+	background: transparent;
+	color: var(--surface);
+	padding: .45rem .9rem;
+	border-radius: 6px;
+	border: 1px solid transparent;
+}
+
+.muted-bg { background: var(--accent); }
+.rounded-lg-smooth { border-radius: 8px; }
+.soft-bottom { border-radius: 12px 12px 0 0; }
+
+/* Reduce defaults for a flatter, professional look */
+.shadowless { box-shadow: none !important; }
+
