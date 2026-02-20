@@ -26,7 +26,7 @@ const registerAdmin = async (req, res) => {
   }
 };
 
-// Login admin
+// Login admin - Only superadmin and clerk roles can login
 const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password)
@@ -36,12 +36,19 @@ const loginAdmin = async (req, res) => {
     const admin = await Admin.findOne({ email });
     if (!admin) return res.status(401).json({ message: 'Invalid credentials' });
 
+    // Verify the user has an admin role
+    const validRoles = ['superadmin', 'clerk'];
+    if (!validRoles.includes(admin.role)) {
+      console.warn(`Login attempt by non-admin user: ${email} with role: ${admin.role}`);
+      return res.status(403).json({ message: 'Only admin users can access this portal' });
+    }
+
     const isMatch = await admin.comparePassword(password);
     if (!isMatch)
       return res.status(401).json({ message: 'Invalid credentials' });
 
     const token = generateToken(admin._id);
-    res.json({
+    res.status(200).json({
       _id: admin._id,
       name: admin.name,
       email: admin.email,

@@ -71,7 +71,7 @@ export default function Dashboard() {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-4xl font-bold text-gray-800 mb-8">📊 Admin Dashboard</h1>
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">📊 Admin Dashboard</h1>
       
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -92,8 +92,8 @@ export default function Dashboard() {
           style={{ borderLeftColor: '#F26522' }}
         >
           <h3 className="text-2xl font-bold mb-2" style={{ color: '#F26522' }}>📁</h3>
-          <h2 className="text-xl font-bold text-gray-800 mb-2">Manage Cases</h2>
-          <p className="text-gray-600">Add, edit, or delete court cases</p>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Manage Cases</h2>
+          <p className="text-gray-900">Add, edit, or delete court cases</p>
         </Link>
 
         <Link 
@@ -102,8 +102,8 @@ export default function Dashboard() {
           style={{ borderLeftColor: '#F26522' }}
         >
           <h3 className="text-2xl font-bold mb-2" style={{ color: '#F26522' }}>👨‍⚖️</h3>
-          <h2 className="text-xl font-bold text-gray-800 mb-2">Manage Judges</h2>
-          <p className="text-gray-600">Add, edit, or delete judges</p>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Manage Judges</h2>
+          <p className="text-gray-900">Add, edit, or delete judges</p>
         </Link>
 
         <Link 
@@ -112,14 +112,14 @@ export default function Dashboard() {
           style={{ borderLeftColor: '#F26522' }}
         >
           <h3 className="text-2xl font-bold mb-2" style={{ color: '#F26522' }}>🗓️</h3>
-          <h2 className="text-xl font-bold text-gray-800 mb-2">Manage Hearings</h2>
-          <p className="text-gray-600">Schedule or reschedule hearings</p>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Manage Hearings</h2>
+          <p className="text-gray-900">Schedule or reschedule hearings</p>
         </Link>
       </div>
 
       {/* Quick Actions */}
       <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">⚙️ Quick Actions</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">⚙️ Quick Actions</h2>
         <div className="flex flex-wrap gap-4">
           <Link 
             to="/admin/cases" 
@@ -145,7 +145,7 @@ export default function Dashboard() {
       {/* Chart */}
       {chartData && (
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Case Status Distribution</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Case Status Distribution</h2>
           <div className="flex justify-center">
             <div style={{ width: '400px', height: '400px' }}>
               <Bar data={chartData} options={options} />
@@ -161,7 +161,7 @@ function StatCard({ label, value, color }) {
   return (
     <div className={`${color} text-white rounded-lg shadow-lg p-6 flex justify-between items-center`}>
       <div>
-        <p className="text-sm opacity-90 mb-1">{label}</p>
+        <p className="text-sm font-semibold mb-1">{label}</p>
         <p className="text-4xl font-bold">{value}</p>
       </div>
     </div>

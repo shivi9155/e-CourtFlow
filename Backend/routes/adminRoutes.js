@@ -6,33 +6,101 @@ const judgeController = require('../controllers/judgeController');
 const hearingController = require('../controllers/hearingController');
 const router = express.Router();
 
-// All admin routes are protected
+// ================================
+// MIDDLEWARE: Protect all admin routes
+// Ensure only authenticated admins can access
+// ================================
 router.use(protect);
 
-// Cases
-router.route('/cases')
-  .get(caseController.getAllCases)
-  .post(validateCase, authorize('superadmin'), caseController.createCase);
-router.route('/cases/:id')
-  .put(authorize('superadmin'), caseController.updateCase)
-  .delete(authorize('superadmin'), caseController.deleteCase);
-router.get('/cases-stats', caseController.getCaseStats);
+// ================================
+// CASES ENDPOINTS
+// ================================
+// GET all cases (superadmin only)
+router.get('/cases', authorize('superadmin'), caseController.getAllCases);
 
-// Judges
-router.route('/judges')
-  .get(judgeController.getAllJudges)
-  .post(authorize('superadmin'), judgeController.createJudge);
-router.route('/judges/:id')
-  .put(authorize('superadmin'), judgeController.updateJudge)
-  .delete(authorize('superadmin'), judgeController.deleteJudge);
-router.get('/judges-stats', judgeController.getJudgeStats);
+// CREATE new case (superadmin only)
+router.post('/cases', 
+  validateCase, 
+  authorize('superadmin'), 
+  caseController.createCase
+);
 
-// Hearings
-router.route('/hearings')
-  .get(hearingController.getAllHearings)
-  .post(authorize('superadmin'), hearingController.createHearing);
-router.route('/hearings/:id')
-  .put(authorize('superadmin'), hearingController.updateHearing)
-  .delete(authorize('superadmin'), hearingController.deleteHearing);
+// UPDATE case (superadmin only)
+router.put('/cases/:id', 
+  authorize('superadmin'), 
+  caseController.updateCase
+);
+
+// DELETE case (superadmin only)
+router.delete('/cases/:id', 
+  authorize('superadmin'), 
+  caseController.deleteCase
+);
+
+// GET case statistics (superadmin only)
+router.get('/cases-stats', 
+  authorize('superadmin'), 
+  caseController.getCaseStats
+);
+
+// ================================
+// JUDGES ENDPOINTS
+// ================================
+// GET all judges (superadmin only)
+router.get('/judges', 
+  authorize('superadmin'), 
+  judgeController.getAllJudges
+);
+
+// CREATE new judge (superadmin only)
+router.post('/judges', 
+  authorize('superadmin'), 
+  judgeController.createJudge
+);
+
+// UPDATE judge (superadmin only)
+router.put('/judges/:id', 
+  authorize('superadmin'), 
+  judgeController.updateJudge
+);
+
+// DELETE judge (superadmin only)
+router.delete('/judges/:id', 
+  authorize('superadmin'), 
+  judgeController.deleteJudge
+);
+
+// GET judge statistics (superadmin only)
+router.get('/judges-stats', 
+  authorize('superadmin'), 
+  judgeController.getJudgeStats
+);
+
+// ================================
+// HEARINGS ENDPOINTS
+// ================================
+// GET all hearings (superadmin only)
+router.get('/hearings', 
+  authorize('superadmin'), 
+  hearingController.getAllHearings
+);
+
+// CREATE new hearing (superadmin only)
+router.post('/hearings', 
+  authorize('superadmin'), 
+  hearingController.createHearing
+);
+
+// UPDATE hearing (superadmin only)
+router.put('/hearings/:id', 
+  authorize('superadmin'), 
+  hearingController.updateHearing
+);
+
+// DELETE hearing (superadmin only)
+router.delete('/hearings/:id', 
+  authorize('superadmin'), 
+  hearingController.deleteHearing
+);
 
 module.exports = router;
