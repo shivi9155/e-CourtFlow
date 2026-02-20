@@ -18,13 +18,24 @@
 
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const publicRoutes = require('./routes/publicRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
-app.use('/api', authRoutes);
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'Server is running' });
+});
+
+app.use('/api/auth', authRoutes);
+app.use('/api/public', publicRoutes);
+app.use('/api/admin', adminRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
@@ -32,5 +43,3 @@ mongoose.connect(process.env.MONGO_URI)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
