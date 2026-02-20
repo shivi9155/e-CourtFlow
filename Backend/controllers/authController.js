@@ -8,6 +8,10 @@ const generateToken = (id) =>
 const registerAdmin = async (req, res) => {
   const { name, email, password, role } = req.body;
   try {
+    // Validate @gmail.com domain
+    if (!email || !email.endsWith('@gmail.com'))
+      return res.status(400).json({ message: 'Admin email must be a @gmail.com address' });
+    
     const adminExists = await Admin.findOne({ email });
     if (adminExists)
       return res.status(400).json({ message: 'Admin already exists' });
@@ -31,6 +35,10 @@ const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password)
     return res.status(400).json({ message: 'Email and password are required' });
+  
+  // Validate @gmail.com domain
+  if (!email.endsWith('@gmail.com'))
+    return res.status(400).json({ message: 'Admin email must be a @gmail.com address' });
 
   try {
     const admin = await Admin.findOne({ email });

@@ -18,6 +18,10 @@ export default function Login() {
       toast.error('Please enter your email');
       return;
     }
+    if (!email.endsWith('@gmail.com')) {
+      toast.error('Admin email must be a @gmail.com address');
+      return;
+    }
     if (!password) {
       toast.error('Please enter your password');
       return;
@@ -44,7 +48,7 @@ export default function Login() {
         
         <div className="bg-blue-50 border border-blue-200 rounded p-4 mb-6">
           <p className="text-sm text-blue-800">
-            <span className="font-semibold">Note:</span> Only users with admin privileges can log in here.
+            <span className="font-semibold">Note:</span> Only users with admin privileges and @gmail.com email can log in here.
           </p>
         </div>
 

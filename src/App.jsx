@@ -19,9 +19,12 @@ import Court from './pages/Court';
 import Login from './pages/Admin/Login';
 import Dashboard from './pages/Admin/Dashboard';
 import AdminCases from './pages/Admin/Cases';
+import AddCase from './pages/Admin/AddCase';
 import AddJudge from './pages/Admin/AddJudge';
 import AdminJudges from './pages/Admin/Judges';
 import Hearings from './pages/Admin/Hearings';
+import ScheduleHearing from './pages/Admin/ScheduleHearing';
+import Reports from './pages/Admin/Reports';
 
 function App() {
   return (
@@ -45,9 +48,12 @@ function App() {
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path="/admin/cases" element={<PrivateRoute><AdminCases /></PrivateRoute>} />
+          <Route path="/admin/cases/new" element={<PrivateRoute><AddCase /></PrivateRoute>} />
           <Route path="/admin/judges" element={<PrivateRoute><AdminJudges /></PrivateRoute>} />
           <Route path="/admin/add-judge" element={<PrivateRoute><AddJudge /></PrivateRoute>} />
           <Route path="/admin/hearings" element={<PrivateRoute><Hearings /></PrivateRoute>} />
+          <Route path="/admin/hearings/schedule" element={<PrivateRoute><ScheduleHearing /></PrivateRoute>} />
+          <Route path="/admin/reports" element={<PrivateRoute><Reports /></PrivateRoute>} />
         </Routes>
         </BrowserRouter>
       </ThemeProvider>
