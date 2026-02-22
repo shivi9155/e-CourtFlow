@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { getAllJudges, getPublicHearings } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Court() {
+  const navigate = useNavigate();
   const [judges, setJudges] = useState([]);
   const [hearings, setHearings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,18 +30,19 @@ export default function Court() {
     loadData();
   }, []);
 
-  const isSameDay = (a, b) => {
-    if (!a || !b) return false;
-    const da = new Date(a);
-    const db = new Date(b);
-    return da.getFullYear() === db.getFullYear() && da.getMonth() === db.getMonth() && da.getDate() === db.getDate();
-  };
-
   const today = new Date();
-  const todayHearings = hearings.filter(h => {
+  
+  // Show upcoming scheduled hearings (not just today's)
+  const upcomingHearings = hearings.filter(h => {
     const raw = h.hearingDate || h.date;
     if (!raw) return false;
-    return isSameDay(raw, today) && (h.status === 'Scheduled' || !h.status);
+    const hearingDate = new Date(raw);
+    // Show hearings from today onwards that are scheduled
+    return hearingDate >= today && (h.status === 'Scheduled' || !h.status);
+  }).sort((a, b) => {
+    const dateA = new Date(a.hearingDate || a.date);
+    const dateB = new Date(b.hearingDate || b.date);
+    return dateA - dateB;
   });
 
   // Filter judges based on availability
@@ -50,8 +52,8 @@ export default function Court() {
 
   // Filter hearings based on status
   const filteredHearings = hearingFilter === 'All'
-    ? todayHearings
-    : todayHearings.filter(h => h.status === hearingFilter);
+    ? upcomingHearings
+    : upcomingHearings.filter(h => h.status === hearingFilter);
 
   const getAvailabilityColor = (status) => {
     switch(status?.toLowerCase()) {
@@ -129,8 +131,8 @@ export default function Court() {
 
           <div className="bg-[#F8F5F0] p-8 text-center border border-[#E8E0D5] hover:shadow-lg transition-shadow">
             <div className="text-[#C5A059] text-3xl mb-3">📅</div>
-            <p className="text-[#5D6D7E] text-sm uppercase tracking-wider mb-2">Today's Hearings</p>
-            <p className="text-4xl font-light text-[#2C3E50]">{todayHearings.length}</p>
+            <p className="text-[#5D6D7E] text-sm uppercase tracking-wider mb-2">Upcoming Hearings</p>
+            <p className="text-4xl font-light text-[#2C3E50]">{upcomingHearings.length}</p>
           </div>
         </div>
 
@@ -194,7 +196,10 @@ export default function Court() {
                     </div>
 
                     <div className="flex gap-3 pt-3 border-t border-[#E8E0D5]">
-                      <button className="text-[#C5A059] hover:text-[#8B4513] text-sm font-medium transition-colors">
+                      <button 
+                        onClick={() => navigate(`/judge/${judge._id}`)}
+                        className="text-[#C5A059] hover:text-[#8B4513] text-sm font-medium transition-colors"
+                      >
                         View Profile →
                       </button>
                       <button className="text-[#5D6D7E] hover:text-[#2C3E50] text-sm font-medium transition-colors">
@@ -207,10 +212,10 @@ export default function Court() {
             )}
           </div>
 
-          {/* Today's Hearings */}
+          {/* Upcoming Hearings */}
           <div>
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-light text-[#2C3E50]">Today's Hearing Schedule</h2>
+              <h2 className="text-2xl font-light text-[#2C3E50]">Upcoming Hearing Schedule</h2>
               
               {/* Hearing Filter */}
               <div className="flex gap-2">
@@ -232,8 +237,8 @@ export default function Court() {
 
             {filteredHearings.length === 0 ? (
               <div className="bg-[#F8F5F0] border border-[#E8E0D5] p-12 text-center">
-                <p className="text-[#5D6D7E] mb-2">No hearings scheduled for today</p>
-                <p className="text-xs text-[#5D6D7E]">Check back later for updates</p>
+                <p className="text-[#5D6D7E] mb-2">No upcoming hearings scheduled</p>
+                <p className="text-xs text-[#5D6D7E]">Check back later for new hearings</p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -274,7 +279,10 @@ export default function Court() {
                     )}
 
                     <div className="flex gap-3 pt-3 border-t border-[#E8E0D5]">
-                      <button className="text-[#C5A059] hover:text-[#8B4513] text-sm font-medium transition-colors">
+                      <button 
+                        onClick={() => hearing.caseId && navigate(`/case/${hearing.caseId._id || hearing.caseId}`)}
+                        className="text-[#C5A059] hover:text-[#8B4513] text-sm font-medium transition-colors"
+                      >
                         View Details →
                       </button>
                       <button className="text-[#5D6D7E] hover:text-[#2C3E50] text-sm font-medium transition-colors">

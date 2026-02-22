@@ -2,13 +2,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import { useTheme } from '../context/ThemeContext';
 
 export default function Navbar() {
   const { admin, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const { theme, toggle } = useTheme();
 
   const isActive = (path) => location.pathname === path;
 
@@ -29,18 +27,25 @@ export default function Navbar() {
             <Link to="/judges" className={`hover:opacity-80 transition ${isActive('/judges') ? 'opacity-100 font-bold' : ''}`}>Judges</Link>
             <Link to="/judge-search" className={`hover:opacity-80 transition ${isActive('/judge-search') ? 'opacity-100 font-bold' : ''}`}>Judge Search</Link>
 
-            {admin && (
+            {/* Admin only section - only visible after successful admin login */}
+            {/* {admin ? (
               <>
-                <Link to="/admin" className={`hover:opacity-80 transition ${isActive('/admin') ? 'opacity-100 font-bold' : ''}`}>📊 Dashboard</Link>
+                <span className="text-gray-400">|</span>
+                <Link to="/admin" className={`hover:opacity-80 transition text-blue-600 ${isActive('/admin') ? 'opacity-100 font-bold' : ''}`}>📊 Admin Dashboard</Link>
                 <button 
                   onClick={logout}
-                  className="btn-ghost px-4 py-2 rounded transition font-semibold"
+                  className="btn-ghost px-4 py-2 rounded transition font-semibold text-red-600"
+                  title="Logout from admin account"
                 >
-                  🚪 Logout
+                  🚪 Admin Logout
                 </button>
               </>
-            )}
-            <button onClick={toggle} className="ml-4 p-2 text-sm rounded bg-white text-black" title="Toggle theme">{theme === 'dark' ? 'Light' : 'Dark'}</button>
+            ) : (
+              <>
+                <span className="text-gray-400">|</span>
+                <Link to="/admin/login" className={`hover:opacity-80 transition text-blue-600 ${isActive('/admin/login') ? 'opacity-100 font-bold' : ''}`}>🔐 Admin Login</Link>
+              </>
+            )} */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -58,16 +63,22 @@ export default function Navbar() {
             <Link to="/court" className="block py-2 px-4 hover:opacity-80 rounded">Court</Link>
             <Link to="/judges" className="block py-2 px-4 hover:opacity-80 rounded">Judges</Link>
             <Link to="/judge-search" className="block py-2 px-4 hover:opacity-80 rounded">Judge Search</Link>
-            {admin && (
+            
+            {/* Admin only section - only visible after successful admin login or for login link */}
+            <div className="border-t border-gray-300 my-2"></div>
+            {admin ? (
               <>
-                <Link to="/admin" className="block py-2 px-4 hover:opacity-80 rounded">📊 Dashboard</Link>
+                <Link to="/admin" className="block py-2 px-4 hover:opacity-80 rounded text-blue-600 font-semibold">📊 Admin Dashboard</Link>
                 <button 
                   onClick={logout}
-                  className="w-full text-left btn-ghost py-2 px-4 rounded hover:opacity-90"
+                  className="w-full text-left btn-ghost py-2 px-4 rounded hover:opacity-90 text-red-600 font-semibold"
+                  title="Logout from admin account"
                 >
-                  🚪 Logout
+                  🚪 Admin Logout
                 </button>
               </>
+            ) : (
+              <Link to="/admin/login" className="block py-2 px-4 hover:opacity-80 rounded text-blue-600 font-semibold">🔐 Admin Login</Link>
             )}
           </div>
         )}

@@ -43,23 +43,27 @@ export const AuthProvider = ({ children }) => {
 
   /**
    * Initialize auth from localStorage on mount
+   * By default, no one is logged in as admin until they explicitly log in.
    */
   useEffect(() => {
     const storedAdmin = localStorage.getItem('admin');
     if (storedAdmin) {
       try {
         const adminData = JSON.parse(storedAdmin);
-        // Verify stored admin has required properties
-        if (adminData.token && adminData.email) {
+        // Verify stored admin has required properties (token and email both required)
+        if (adminData && adminData.token && adminData.email && adminData.role) {
           setAdmin(adminData);
         } else {
+          // Clear any corrupted or incomplete admin data
           localStorage.removeItem('admin');
         }
       } catch (err) {
         console.error('Failed to parse stored admin data:', err);
+        // Clear corrupted data to ensure clean state
         localStorage.removeItem('admin');
       }
     }
+    // Ensure we start with admin = null (no one logged in by default)
     setLoading(false);
   }, []);
 

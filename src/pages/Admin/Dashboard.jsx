@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import { fetchCases, fetchJudges, fetchHearings } from '../../services/api';
 import { Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
@@ -8,6 +9,7 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
 export default function Dashboard() {
+  const { admin } = useAuth();
   const [stats, setStats] = useState(null);
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -120,8 +122,9 @@ export default function Dashboard() {
               </p>
             </div>
             <div className="text-right">
-              <p className="text-sm text-gray-300">Welcome back, Admin</p>
+              <p className="text-sm text-gray-300">Welcome back, {admin?.name || 'Administrator'}</p>
               <p className="text-xs text-gray-400">{new Date().toLocaleDateString()}</p>
+              {admin?.role && <p className="text-xs text-[#C5A059] uppercase tracking-wide mt-1">{admin.role}</p>}
             </div>
           </div>
         </div>

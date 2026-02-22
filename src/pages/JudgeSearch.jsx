@@ -53,22 +53,22 @@ export default function JudgeSearch() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-12">
+    <div className="bg-gray-900 min-h-screen py-12">
       <div className="container mx-auto px-4">
         {/* Search Section */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">🔍 Search Judge</h1>
+        <div className="bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+          <h1 className="text-4xl font-bold text-white mb-6 text-center">🔍 Search Judge</h1>
           
           <form onSubmit={handleSearch} className="max-w-2xl mx-auto">
             <div className="flex gap-3">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+                <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-500" />
                 <input
                   type="text"
                   placeholder="Enter judge name..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none transition"
+                  className="w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none transition bg-gray-700 text-white placeholder-gray-400"
                   style={{ borderColor: '#F26522' }}
                 />
               </div>
@@ -96,9 +96,9 @@ export default function JudgeSearch() {
 
         {/* Judge Details */}
         {searched && !judge && !loading && (
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-8 text-center">
-            <p className="text-yellow-800 text-lg">No judge found matching "{searchQuery}"</p>
-            <p className="text-yellow-600 mt-2">Try searching with a different name</p>
+          <div className="bg-red-900 border border-red-700 rounded-lg p-8 text-center">
+            <p className="text-red-100 text-lg">No judge found matching "{searchQuery}"</p>
+            <p className="text-red-200 mt-2">Try searching with a different name</p>
           </div>
         )}
 
@@ -106,38 +106,38 @@ export default function JudgeSearch() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Judge Info */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-lg p-6 sticky top-4">
+              <div className="bg-gray-800 rounded-lg shadow-lg p-6 sticky top-4">
                 <div className="text-center mb-6">
                   <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl" style={{ backgroundColor: '#F26522' }}>
                     ⚖️
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-800">{judge.name}</h2>
-                  <p className="text-gray-600 text-sm mt-1">{judge.specialization} Specialist</p>
+                  <h2 className="text-2xl font-bold text-white">{judge.name}</h2>
+                  <p className="text-gray-400 text-sm mt-1">{judge.specialization} Specialist</p>
                 </div>
 
-                <div className="space-y-4 border-t pt-4">
+                <div className="space-y-4 border-t border-gray-700 pt-4">
                   <div>
-                    <p className="text-gray-600 text-xs uppercase tracking-wide">Email</p>
-                    <p className="text-gray-800 font-semibold break-all">{judge.email}</p>
+                    <p className="text-gray-400 text-xs uppercase tracking-wide">Email</p>
+                    <p className="text-gray-100 font-semibold break-all">{judge.email}</p>
                   </div>
                   
                   <div>
-                    <p className="text-gray-600 text-xs uppercase tracking-wide">Phone</p>
-                    <p className="text-gray-800 font-semibold">{judge.phone}</p>
+                    <p className="text-gray-400 text-xs uppercase tracking-wide">Phone</p>
+                    <p className="text-gray-100 font-semibold">{judge.phone}</p>
                   </div>
 
                   <div>
-                    <p className="text-gray-600 text-xs uppercase tracking-wide">Court</p>
-                    <p className="text-gray-800 font-semibold">{judge.court}</p>
+                    <p className="text-gray-400 text-xs uppercase tracking-wide">Court</p>
+                    <p className="text-gray-100 font-semibold">{judge.court}</p>
                   </div>
 
                   <div>
-                    <p className="text-gray-600 text-xs uppercase tracking-wide">Experience</p>
-                    <p className="text-gray-800 font-semibold">{judge.experience} years</p>
+                    <p className="text-gray-400 text-xs uppercase tracking-wide">Experience</p>
+                    <p className="text-gray-100 font-semibold">{judge.experience} years</p>
                   </div>
 
                   <div>
-                    <p className="text-gray-600 text-xs uppercase tracking-wide">Status</p>
+                    <p className="text-gray-400 text-xs uppercase tracking-wide">Status</p>
                     <p className={`text-sm font-bold px-3 py-1 rounded-full inline-block mt-2 ${
                       judge.availabilityStatus === 'available' ? 'bg-green-100 text-green-800' :
                       judge.availabilityStatus === 'busy' ? 'bg-yellow-100 text-yellow-800' :
@@ -153,19 +153,19 @@ export default function JudgeSearch() {
             {/* Assigned Cases & Hearings */}
             <div className="lg:col-span-2 space-y-8">
               {/* Assigned Cases */}
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+              <div className="bg-gray-800 rounded-lg shadow-lg p-6">
+                <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
                   <span>📋</span> Assigned Cases [{judge.assignedCases?.length || 0}]
                 </h3>
 
                 {judge.assignedCases && judge.assignedCases.length > 0 ? (
                   <div className="space-y-4">
                     {judge.assignedCases.map((caseItem) => (
-                      <div key={caseItem._id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
+                      <div key={caseItem._id} className="border border-gray-700 bg-gray-700 rounded-lg p-4 hover:shadow-md transition">
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1">
-                            <h4 className="font-bold text-gray-800 text-lg">{caseItem.caseNumber}</h4>
-                            <p className="text-gray-600 mt-1">{caseItem.title}</p>
+                            <h4 className="font-bold text-white text-lg">{caseItem.caseNumber}</h4>
+                            <p className="text-gray-300 mt-1">{caseItem.title}</p>
                             
                             <div className="flex flex-wrap gap-2 mt-3">
                               <span className={`text-xs font-bold px-2 py-1 rounded ${
@@ -185,7 +185,7 @@ export default function JudgeSearch() {
                               </span>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-2 mt-3 text-sm text-gray-600">
+                            <div className="grid grid-cols-2 gap-2 mt-3 text-sm text-gray-400">
                               <div>
                                 <p className="text-xs uppercase tracking-wide font-semibold">Plaintiff</p>
                                 <p>{caseItem.plaintiffName}</p>
@@ -201,26 +201,26 @@ export default function JudgeSearch() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-gray-500">
+                  <div className="text-center py-8 text-gray-400">
                     <p>No cases assigned</p>
                   </div>
                 )}
               </div>
 
               {/* Hearings */}
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+              <div className="bg-gray-800 rounded-lg shadow-lg p-6">
+                <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
                   <span>🗓️</span> Scheduled Hearings [{hearings.length}]
                 </h3>
 
                 {hearings.length > 0 ? (
                   <div className="space-y-4">
                     {hearings.map((hearing) => (
-                      <div key={hearing._id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
+                      <div key={hearing._id} className="border border-gray-700 bg-gray-700 rounded-lg p-4 hover:shadow-md transition">
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
-                              <h4 className="font-bold text-gray-800">
+                              <h4 className="font-bold text-white">
                                 📅 {new Date(hearing.hearingDate).toLocaleDateString('en-US', {
                                   weekday: 'short',
                                   year: 'numeric',
@@ -239,26 +239,26 @@ export default function JudgeSearch() {
 
                             <div className="grid grid-cols-2 gap-3 mt-2 text-sm">
                               <div>
-                                <p className="text-gray-600">⏰ Time</p>
-                                <p className="font-semibold text-gray-800">{hearing.hearingTime || 'TBD'}</p>
+                                <p className="text-gray-400">⏰ Time</p>
+                                <p className="font-semibold text-white">{hearing.hearingTime || 'TBD'}</p>
                               </div>
                               <div>
-                                <p className="text-gray-600">🚪 Courtroom</p>
-                                <p className="font-semibold text-gray-800">{hearing.courtroom || 'TBD'}</p>
+                                <p className="text-gray-400">🚪 Courtroom</p>
+                                <p className="font-semibold text-white">{hearing.courtroom || 'TBD'}</p>
                               </div>
                             </div>
 
                             {hearing.purpose && (
-                              <div className="mt-3 p-2 bg-gray-50 rounded">
-                                <p className="text-xs text-gray-600">Purpose</p>
-                                <p className="text-gray-800">{hearing.purpose}</p>
+                              <div className="mt-3 p-2 bg-gray-600 rounded">
+                                <p className="text-xs text-gray-300">Purpose</p>
+                                <p className="text-gray-100">{hearing.purpose}</p>
                               </div>
                             )}
 
                             {hearing.notes && (
-                              <div className="mt-2 p-2 bg-blue-50 rounded">
-                                <p className="text-xs text-gray-600">Notes</p>
-                                <p className="text-gray-800">{hearing.notes}</p>
+                              <div className="mt-2 p-2 bg-blue-900 rounded">
+                                <p className="text-xs text-gray-300">Notes</p>
+                                <p className="text-gray-100">{hearing.notes}</p>
                               </div>
                             )}
                           </div>
@@ -267,7 +267,7 @@ export default function JudgeSearch() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-gray-500">
+                  <div className="text-center py-8 text-gray-400">
                     <p>No hearings scheduled</p>
                   </div>
                 )}
