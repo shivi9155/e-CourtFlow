@@ -29,7 +29,7 @@ export default function Navbar() {
             <Link to="/judges" className={`hover:opacity-80 transition ${isActive('/judges') ? 'opacity-100 font-bold' : ''}`}>Judges</Link>
             <Link to="/judge-search" className={`hover:opacity-80 transition ${isActive('/judge-search') ? 'opacity-100 font-bold' : ''}`}>Judge Search</Link>
 
-            {admin ? (
+            {admin && (
               <>
                 <Link to="/admin" className={`hover:opacity-80 transition ${isActive('/admin') ? 'opacity-100 font-bold' : ''}`}>📊 Dashboard</Link>
                 <button 
@@ -39,10 +39,6 @@ export default function Navbar() {
                   🚪 Logout
                 </button>
               </>
-            ) : (
-              <Link to="/admin/login" className="btn-primary hover:opacity-95">
-                Admin Login
-              </Link>
             )}
             <button onClick={toggle} className="ml-4 p-2 text-sm rounded bg-white text-black" title="Toggle theme">{theme === 'dark' ? 'Light' : 'Dark'}</button>
           </div>
@@ -62,7 +58,7 @@ export default function Navbar() {
             <Link to="/court" className="block py-2 px-4 hover:opacity-80 rounded">Court</Link>
             <Link to="/judges" className="block py-2 px-4 hover:opacity-80 rounded">Judges</Link>
             <Link to="/judge-search" className="block py-2 px-4 hover:opacity-80 rounded">Judge Search</Link>
-            {admin ? (
+            {admin && (
               <>
                 <Link to="/admin" className="block py-2 px-4 hover:opacity-80 rounded">📊 Dashboard</Link>
                 <button 
@@ -72,10 +68,6 @@ export default function Navbar() {
                   🚪 Logout
                 </button>
               </>
-            ) : (
-              <Link to="/admin/login" className="block py-2 px-4 rounded btn-primary">
-                🔐 Admin Login
-              </Link>
             )}
           </div>
         )}
