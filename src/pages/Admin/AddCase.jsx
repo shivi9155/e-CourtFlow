@@ -87,7 +87,7 @@ export default function AddCase() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-[#2C3E50] text-white py-8">
+      <div className="bg-[#2C3E50] text-black py-8">
         <div className="container mx-auto px-4">
           <button
             onClick={() => navigate('/admin')}
@@ -119,7 +119,7 @@ export default function AddCase() {
                 value={formData.caseNumber}
                 onChange={handleChange}
                 placeholder="e.g., 2024-0001"
-                className="w-full px-4 py-3 border border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
+                className="w-full px-4 py-3 border text-black border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
                 required
                 disabled={loading}
               />
@@ -136,7 +136,7 @@ export default function AddCase() {
                 value={formData.title}
                 onChange={handleChange}
                 placeholder="e.g., Smith v. Jones"
-                className="w-full px-4 py-3 border border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
+                className="w-full px-4 py-3 border text-black border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
                 required
                 disabled={loading}
               />
@@ -151,7 +151,7 @@ export default function AddCase() {
                 name="caseType"
                 value={formData.caseType}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
+                className="w-full px-4 py-3 text-blackborder text-black border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
                 required
                 disabled={loading}
               >
@@ -174,7 +174,7 @@ export default function AddCase() {
                 value={formData.courtName}
                 onChange={handleChange}
                 placeholder="e.g., District Court"
-                className="w-full px-4 py-3 border border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
+                className="w-full px-4 py-3 text-blackborder text-black border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
                 disabled={loading}
               />
             </div>
@@ -190,7 +190,7 @@ export default function AddCase() {
                 value={formData.parties.petitioner}
                 onChange={handleChange}
                 placeholder="Petitioner name"
-                className="w-full px-4 py-3 border border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
+                className="w-full px-4 py-3 border text-black border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
                 required
                 disabled={loading}
               />
@@ -207,7 +207,7 @@ export default function AddCase() {
                 value={formData.parties.respondent}
                 onChange={handleChange}
                 placeholder="Respondent name"
-                className="w-full px-4 py-3 border border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
+                className="w-full px-4 py-3 border text-black border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
                 required
                 disabled={loading}
               />
@@ -224,7 +224,7 @@ export default function AddCase() {
                 onChange={handleChange}
                 placeholder="Enter case details..."
                 rows="4"
-                className="w-full px-4 py-3 border border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
+                className="w-full px-4 py-3 border text-black border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
                 disabled={loading}
               />
             </div>
@@ -239,7 +239,7 @@ export default function AddCase() {
                 name="filingDate"
                 value={formData.filingDate}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
+                className="w-full px-4 py-3 border text-black border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
                 required
                 disabled={loading}
               />
@@ -254,7 +254,7 @@ export default function AddCase() {
                 name="status"
                 value={formData.status}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
+                className="w-full px-4 py-3 border text-black border-[#E8E0D5] rounded-lg focus:outline-none focus:border-[#C5A059] bg-white"
                 disabled={loading}
               >
                 <option value="Pending">Pending</option>

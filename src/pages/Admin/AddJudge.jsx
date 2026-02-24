@@ -53,7 +53,7 @@ export default function AddJudge() {
               value={form.name}
               onChange={handleChange}
               required
-              className="w-full p-3 border-2 rounded focus:outline-none"
+              className="w-full p-3 border-2 rounded focus:outline-none texrt-black text-black"
               style={{ borderColor: '#ccc' }}
               onFocus={(e) => e.target.style.borderColor = '#F26522'}
               onBlur={(e) => e.target.style.borderColor = '#ccc'}
@@ -70,7 +70,7 @@ export default function AddJudge() {
               value={form.email}
               onChange={handleChange}
               required
-              className="w-full p-3 border-2 rounded focus:outline-none"
+              className="w-full p-3 border-2 rounded focus:outline-none text-black"
               style={{ borderColor: '#ccc' }}
               onFocus={(e) => e.target.style.borderColor = '#F26522'}
               onBlur={(e) => e.target.style.borderColor = '#ccc'}
@@ -87,7 +87,7 @@ export default function AddJudge() {
               value={form.phone}
               onChange={handleChange}
               required
-              className="w-full p-3 border-2 rounded focus:outline-none"
+              className="w-full p-3 border-2 rounded focus:outline-none text-black"
               style={{ borderColor: '#ccc' }}
               onFocus={(e) => e.target.style.borderColor = '#F26522'}
               onBlur={(e) => e.target.style.borderColor = '#ccc'}
@@ -104,7 +104,7 @@ export default function AddJudge() {
               value={form.court}
               onChange={handleChange}
               required
-              className="w-full p-3 border-2 rounded focus:outline-none"
+              className="w-full p-3 border-2 rounded focus:outline-none text-black"
               style={{ borderColor: '#ccc' }}
               onFocus={(e) => e.target.style.borderColor = '#F26522'}
               onBlur={(e) => e.target.style.borderColor = '#ccc'}
@@ -119,8 +119,8 @@ export default function AddJudge() {
               type="text"
               name="specialization"
               value={form.specialization}
-              onChange={handleChange}
-              className="w-full p-3 border-2 rounded focus:outline-none"
+              onChange={handleChange} 
+              className="w-full p-3 border-2 rounded focus:outline-none text-black"
               style={{ borderColor: '#ccc' }}
               onFocus={(e) => e.target.style.borderColor = '#F26522'}
               onBlur={(e) => e.target.style.borderColor = '#ccc'}
@@ -138,7 +138,7 @@ export default function AddJudge() {
               onChange={handleChange}
               required
               min="0"
-              className="w-full p-3 border-2 rounded focus:outline-none"
+              className="w-full p-3 border-2 rounded focus:outline-none text-black"
               style={{ borderColor: '#ccc' }}
               onFocus={(e) => e.target.style.borderColor = '#F26522'}
               onBlur={(e) => e.target.style.borderColor = '#ccc'}
@@ -153,7 +153,7 @@ export default function AddJudge() {
               name="availabilityStatus"
               value={form.availabilityStatus}
               onChange={handleChange}
-              className="w-full p-3 border-2 rounded focus:outline-none"
+              className="w-full p-3 border-2 rounded focus:outline-none text-black"
               style={{ borderColor: '#ccc' }}
               onFocus={(e) => e.target.style.borderColor = '#F26522'}
               onBlur={(e) => e.target.style.borderColor = '#ccc'}

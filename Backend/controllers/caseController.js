@@ -63,6 +63,13 @@ const getAllCases = async (req, res) => {
 const createCase = async (req, res) => {
   try {
     const newCase = await Case.create(req.body);
+    // If assignedJudge exists, push case _id to judge's assignedCases
+    if (newCase.assignedJudge) {
+      await Judge.findByIdAndUpdate(
+        newCase.assignedJudge,
+        { $push: { assignedCases: newCase._id } }
+      );
+    }
     res.status(201).json(newCase);
   } catch (err) {
     res.status(400).json({ message: err.message });

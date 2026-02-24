@@ -67,7 +67,7 @@ Grant/deny access to resource
 - **No Authentication Required**
 - **Permissions**:
   - Search and view cases
-  - View judge profiles
+  -  profiView judgeles
   - View hearing schedules
   - View statistics
   - **Cannot**: Add, edit, or delete any data

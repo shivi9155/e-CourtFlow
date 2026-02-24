@@ -10,8 +10,13 @@ export default function Cases() {
   const [formData, setFormData] = useState({
     caseNumber: '',
     title: '',
+    description: '',
     parties: { petitioner: '', respondent: '' },
-    status: 'pending'
+    plaintiffName: '',
+    defendantName: '',
+    filingDate: '',
+    status: 'Pending',
+    caseType: ''
   });
 
   useEffect(() => {
@@ -25,7 +30,17 @@ export default function Cases() {
 
   const openCreateModal = () => {
     setEditingCase(null);
-    setFormData({ caseNumber: '', title: '', parties: { petitioner: '', respondent: '' }, status: 'pending' });
+    setFormData({
+      caseNumber: '',
+      title: '',
+      description: '',
+      parties: { petitioner: '', respondent: '' },
+      plaintiffName: '',
+      defendantName: '',
+      filingDate: '',
+      status: 'Pending',
+      caseType: ''
+    });
     setModalOpen(true);
   };
 
@@ -34,8 +49,13 @@ export default function Cases() {
     setFormData({
       caseNumber: c.caseNumber,
       title: c.title,
+      description: c.description || '',
       parties: { petitioner: c.parties.petitioner, respondent: c.parties.respondent },
-      status: c.status
+      plaintiffName: c.plaintiffName || '',
+      defendantName: c.defendantName || '',
+      filingDate: c.filingDate ? c.filingDate.substring(0, 10) : '',
+      status: c.status,
+      caseType: c.caseType || ''
     });
     setModalOpen(true);
   };

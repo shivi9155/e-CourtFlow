@@ -48,12 +48,12 @@ export default function Court() {
   // Filter judges based on availability
   const filteredJudges = judgeFilter === 'All' 
     ? judges 
-    : judges.filter(j => j.availabilityStatus?.toLowerCase() === judgeFilter.toLowerCase());
+    : judges.filter(j => j.availabilityStatus && j.availabilityStatus.toLowerCase() === judgeFilter.toLowerCase());
 
   // Filter hearings based on status
   const filteredHearings = hearingFilter === 'All'
     ? upcomingHearings
-    : upcomingHearings.filter(h => h.status === hearingFilter);
+    : upcomingHearings.filter(h => h.status && h.status.toLowerCase() === hearingFilter.toLowerCase());
 
   const getAvailabilityColor = (status) => {
     switch(status?.toLowerCase()) {
@@ -144,7 +144,7 @@ export default function Court() {
               
               {/* Judge Filter */}
               <div className="flex gap-2">
-                {['All', 'Available', 'Busy', 'On Leave'].map(status => (
+                {['All', 'available', 'busy', 'on-leave'].map(status => (
                   <button
                     key={status}
                     onClick={() => setJudgeFilter(status)}
@@ -154,7 +154,7 @@ export default function Court() {
                         : 'bg-[#F8F5F0] text-[#5D6D7E] hover:bg-[#E8E0D5] border border-[#E8E0D5]'
                     }`}
                   >
-                    {status}
+                    {status.charAt(0).toUpperCase() + status.slice(1).replace('-', ' ')}
                   </button>
                 ))}
               </div>

@@ -57,6 +57,7 @@ router.get('/verify', protect, (req, res) => {
       id: req.admin._id,
       name: req.admin.name,
       email: req.admin.email,
+      
       role: req.admin.role
     }
   });

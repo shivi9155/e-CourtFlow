@@ -20,7 +20,7 @@ router.get('/cases', authorize('superadmin'), caseController.getAllCases);
 
 // CREATE new case (superadmin only)
 router.post('/cases', 
-  validateCase, 
+  ...validateCase, 
   authorize('superadmin'), 
   caseController.createCase
 );
