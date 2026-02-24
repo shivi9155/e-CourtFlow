@@ -1,0 +1,100 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "e-CourtFlow API Collection",
+  "requests": [
+    {
+      "name": "Register Admin",
+      "method": "POST",
+      "url": "http://localhost:5000/api/auth/register",
+      "body": {
+        "type": "json",
+        "raw": {
+          "name": "Admin Name",
+          "email": "admin_email@gmail.com",
+          "password": "your_password",
+          "role": "superadmin"
+        }
+      }
+    },
+    {
+      "name": "Login Admin",
+      "method": "POST",
+      "url": "http://localhost:5000/api/auth/login",
+      "body": {
+        "type": "json",
+        "raw": {
+          "email": "admin_email@gmail.com",
+          "password": "your_password"
+        }
+      }
+    },
+    {
+      "name": "Get All Cases (Admin)",
+      "method": "GET",
+      "url": "http://localhost:5000/api/admin/cases",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{token}}" }
+      ]
+    },
+    {
+      "name": "Add Case (Admin)",
+      "method": "POST",
+      "url": "http://localhost:5000/api/admin/cases",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{token}}" },
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "type": "json",
+        "raw": {
+          "caseId": "C-1001",
+          "caseNumber": "2026-001",
+          "title": "Property Dispute",
+          "caseType": "Civil",
+          "plaintiffName": "John Doe",
+          "defendantName": "Jane Smith",
+          "parties": {
+            "petitioner": "John Doe",
+            "respondent": "Jane Smith"
+          }
+        }
+      }
+    },
+    {
+      "name": "Get All Cases (Public)",
+      "method": "GET",
+      "url": "http://localhost:5000/api/public/cases"
+    },
+    {
+      "name": "Search Cases (Public)",
+      "method": "GET",
+      "url": "http://localhost:5000/api/public/cases/search?q=property"
+    },
+    {
+      "name": "Get All Judges (Admin)",
+      "method": "GET",
+      "url": "http://localhost:5000/api/admin/judges",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{token}}" }
+      ]
+    },
+    {
+      "name": "Get All Judges (Public)",
+      "method": "GET",
+      "url": "http://localhost:5000/api/public/judges"
+    },
+    {
+      "name": "Get All Hearings (Admin)",
+      "method": "GET",
+      "url": "http://localhost:5000/api/admin/hearings",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{token}}" }
+      ]
+    },
+    {
+      "name": "Get All Hearings (Public)",
+      "method": "GET",
+      "url": "http://localhost:5000/api/public/hearings"
+    }
+  ]
+}

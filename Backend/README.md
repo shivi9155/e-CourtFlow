@@ -59,13 +59,36 @@ Note: `Backend/package.json` includes a `start` script that runs `node server.js
 
 ## Important files & folders
 
+
 - `server.js` — App entry, Express setup, route mounting.
 - `config/db.js` — MongoDB connection helper.
-- `controllers/` — Request handlers for auth, cases, hearings, judges.
-- `models/` — Mongoose schemas: `Case`, `Judge`, `Hearing`, `Court`, `Admin`.
-- `routes/` — API route definitions (`authRoutes.js`, `caseRoutes.js`, `hearingRoutes.js`, etc.).
-- `middleware/` — `authMiddleware.js`, validation middleware.
 - `seed.js` — Script to populate sample data.
+
+### controllers/
+Request handler logic for each main resource:
+  - **authController.js** — Handles admin registration and login. Validates admin roles, issues JWT tokens, and enforces @gmail.com domain for admin emails.
+  - **caseController.js** — Manages case data. Supports searching, retrieving, creating, updating, and deleting cases. Handles both public and admin endpoints.
+  - **hearingController.js** — Manages hearings. Allows scheduling, updating, retrieving, and listing hearings by case or judge. Handles both public and admin endpoints.
+  - **judgeController.js** — Handles judge profiles. Supports listing, searching, creating, updating, and retrieving judges for both public and admin views.
+
+### middleware/
+Express middleware for authentication and validation:
+  - **authMiddleware.js** — Protects routes using JWT authentication. Ensures only authenticated admins with valid roles (superadmin, clerk) can access protected endpoints. Also provides role-based authorization.
+  - **validationMiddleware.js** — Validates request bodies for case creation and updates using express-validator. Returns errors if required fields are missing or invalid.
+
+### models/
+Mongoose schemas for MongoDB collections:
+  - **Case.js** — Defines the structure for court cases, including parties, status, assigned judge, and hearing dates.
+  - **Judge.js** — Judge profile schema, including name, contact, specialization, assigned cases, and availability.
+  - **Hearing.js** — Schema for hearings, linking to cases and judges, with date, time, status, and notes.
+  - **Court.js** — Court details, location, courtrooms, judges, and active cases.
+  - **Admin.js** — Admin user schema with hashed password, role (superadmin/clerk), and authentication helpers.
+
+### routes/
+Express route definitions for API endpoints:
+  - **authRoutes.js** — Handles admin registration, login, and dashboard access. Uses auth middleware for protection.
+  - **adminRoutes.js** — All admin-only endpoints for managing cases, judges, and hearings. Protected by authentication and role-based authorization. Uses validation middleware for input checks.
+  - **publicRoutes.js** — Publicly accessible endpoints for searching/viewing cases, judges, and hearings. No authentication required.
 
 ## API & Authentication
 

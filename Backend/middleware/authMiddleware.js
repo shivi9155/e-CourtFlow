@@ -1,10 +1,7 @@
 const jwt = require('jsonwebtoken');
 const Admin = require('../models/Admin');
 
-/**
- * Protect route - verify JWT token is valid and user exists
- * Attaches admin user to req.admin if successful
- */
+
 const protect = async (req, res, next) => {
   let token;
   

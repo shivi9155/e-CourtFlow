@@ -1,20 +1,34 @@
 const Case = require('../models/Case');
 
 // Public: search cases by caseNumber, plaintiff, or defendant
-const searchCases = async (req, res) => {
+
+   const searchCases = async (req, res) => {
   const { q } = req.query;
+
+  console.log("Search Query:", q);
+
+  if (!q) {
+    return res.status(400).json({ message: "Search query is required" });
+  }
+
   try {
     const cases = await Case.find({
       $or: [
         { caseNumber: { $regex: q, $options: 'i' } },
         { caseId: { $regex: q, $options: 'i' } },
+        { title: { $regex: q, $options: 'i' } },
+        { description: { $regex: q, $options: 'i' } },
         { plaintiffName: { $regex: q, $options: 'i' } },
         { defendantName: { $regex: q, $options: 'i' } },
         { 'parties.petitioner': { $regex: q, $options: 'i' } },
         { 'parties.respondent': { $regex: q, $options: 'i' } }
       ]
-    }).populate('assignedJudge', 'name email').populate('hearingDates');
+    });
+
+    console.log("Found Cases:", cases.length);
+
     res.json(cases);
+
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
