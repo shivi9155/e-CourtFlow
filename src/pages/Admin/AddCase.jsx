@@ -24,7 +24,7 @@ export default function AddCase() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     if (name.includes('.')) {
       const [parent, child] = name.split('.');
       setFormData(prev => ({
@@ -44,7 +44,7 @@ export default function AddCase() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validation
     if (!formData.caseNumber.trim()) {
       toast.error('Case number is required');
@@ -73,7 +73,14 @@ export default function AddCase() {
 
     setLoading(true);
     try {
-      await createCase(formData);
+      // Sync fields for backend compatibility
+      const submissionData = {
+        ...formData,
+        plaintiffName: formData.parties.petitioner,
+        defendantName: formData.parties.respondent
+      };
+
+      await createCase(submissionData);
       toast.success('Case created successfully');
       navigate('/admin/cases');
     } catch (err) {

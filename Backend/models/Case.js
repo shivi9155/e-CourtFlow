@@ -58,12 +58,11 @@ const CaseSchema = new mongoose.Schema({
 
 
 // ✅ Better Unique Case ID Generator (No Duplicate Risk)
-CaseSchema.pre('validate', async function(next) {
+CaseSchema.pre('validate', async function() {
   if (!this.caseId) {
     const random = Math.floor(100000 + Math.random() * 900000);
     this.caseId = `ECF-${Date.now()}-${random}`;
   }
-  next();
 });
 
 module.exports = mongoose.model('Case', CaseSchema);

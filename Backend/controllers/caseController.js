@@ -1,8 +1,9 @@
 const Case = require('../models/Case');
+const Judge = require('../models/Judge');
 
 // Public: search cases by caseNumber, plaintiff, or defendant
 
-   const searchCases = async (req, res) => {
+const searchCases = async (req, res) => {
   const { q } = req.query;
 
   console.log("Search Query:", q);
@@ -119,7 +120,7 @@ const getCaseStats = async (req, res) => {
     const pendingCases = await Case.countDocuments({ status: 'Pending' });
     const ongoingCases = await Case.countDocuments({ status: 'Ongoing' });
     const closedCases = await Case.countDocuments({ status: 'Closed' });
-    
+
     const casesByType = await Case.aggregate([
       { $group: { _id: '$caseType', count: { $sum: 1 } } }
     ]);

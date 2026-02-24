@@ -12,13 +12,13 @@ const seedAdmin = async () => {
     const admins = [
       {
         name: 'Super Admin',
-        email: 'superadmin@court.com',
+        email: 'superadmin@gmail.com',
         password: 'superadmin123',
         role: 'superadmin'
       },
       {
         name: 'Clerk Admin',
-        email: 'clerk@court.com',
+        email: 'clerk@gmail.com',
         password: 'clerk123',
         role: 'clerk'
       }
