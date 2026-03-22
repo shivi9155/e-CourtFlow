@@ -120,8 +120,8 @@ export default function Home() {
         // Upcoming hearings
         const now = new Date();
         const upcoming = hearings
-          .filter(h => new Date(h.date) >= now)
-          .sort((a, b) => new Date(a.date) - new Date(b.date))
+          .filter(h => new Date(h.hearingDate) >= now)
+          .sort((a, b) => new Date(a.hearingDate) - new Date(b.hearingDate))
           .slice(0, 5);
         setUpcomingHearings(upcoming);
 
@@ -331,7 +331,7 @@ export default function Home() {
                 <p className="text-[#C5A059] text-sm uppercase tracking-wider mb-1">Next Hearing</p>
                 <p className="text-lg font-light">
                   {upcomingHearings.length > 0 
-                    ? new Date(upcomingHearings[0].date).toLocaleDateString()
+                    ? new Date(upcomingHearings[0].hearingDate).toLocaleDateString()
                     : 'No upcoming'}
                 </p>
               </div>

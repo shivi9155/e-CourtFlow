@@ -5,7 +5,8 @@ const getHearingsByCase = async (req, res) => {
   try {
     const hearings = await Hearing.find({ caseId: req.params.caseId })
       .populate('caseId')
-      .populate('judgeId', 'name');
+      .populate('judgeId', 'name email court specialization')
+      .sort({ hearingDate: 1 });
 
     res.json(hearings);
   } catch (err) {

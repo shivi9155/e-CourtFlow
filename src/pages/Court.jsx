@@ -34,14 +34,13 @@ export default function Court() {
   
   // Show upcoming scheduled hearings (not just today's)
   const upcomingHearings = hearings.filter(h => {
-    const raw = h.hearingDate || h.date;
-    if (!raw) return false;
-    const hearingDate = new Date(raw);
+    if (!h.hearingDate) return false;
+    const hearingDate = new Date(h.hearingDate);
     // Show hearings from today onwards that are scheduled
     return hearingDate >= today && (h.status === 'Scheduled' || !h.status);
   }).sort((a, b) => {
-    const dateA = new Date(a.hearingDate || a.date);
-    const dateB = new Date(b.hearingDate || b.date);
+    const dateA = new Date(a.hearingDate);
+    const dateB = new Date(b.hearingDate);
     return dateA - dateB;
   });
 
@@ -259,9 +258,15 @@ export default function Court() {
                     {/* Hearing Details */}
                     <div className="grid grid-cols-2 gap-3 mb-4">
                       <div>
+                        <p className="text-xs text-[#5D6D7E] uppercase tracking-wider">Date</p>
+                        <p className="text-sm text-[#2C3E50]">
+                          {new Date(hearing.hearingDate).toLocaleDateString([], { month: 'short', day: 'numeric', year: '2-digit' })}
+                        </p>
+                      </div>
+                      <div>
                         <p className="text-xs text-[#5D6D7E] uppercase tracking-wider">Time</p>
                         <p className="text-sm text-[#2C3E50]">
-                          {hearing.hearingTime || new Date(hearing.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          {hearing.hearingTime || 'Not specified'}
                         </p>
                       </div>
                       <div>
@@ -271,10 +276,10 @@ export default function Court() {
                     </div>
 
                     {/* Judge Info */}
-                    {hearing.judge && (
+                    {hearing.judgeId && (
                       <div className="mb-4">
                         <p className="text-xs text-[#5D6D7E] uppercase tracking-wider">Presiding Judge</p>
-                        <p className="text-sm text-[#2C3E50]">{hearing.judge.name || hearing.judge}</p>
+                        <p className="text-sm text-[#2C3E50]">{hearing.judgeId.name || 'Unknown'}</p>
                       </div>
                     )}
 
