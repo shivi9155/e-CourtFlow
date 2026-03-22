@@ -3,7 +3,6 @@
 This document describes the REST API provided by the e-CourtFlow backend. It covers public endpoints, authentication, and protected admin endpoints used by the frontend.
 
 Base URL
-
 - Local development default: `http://localhost:5000`
 - API base paths used in this project:
   - Auth routes: `/api/auth`
@@ -11,7 +10,6 @@ Base URL
   - Admin (protected) routes: `/api/admin`
 
 Authentication
-
 - Authentication uses JSON Web Tokens (JWT).
 - Login via `POST /api/auth/login` returns a token in the response body.
 - For protected (admin) endpoints include the header:
