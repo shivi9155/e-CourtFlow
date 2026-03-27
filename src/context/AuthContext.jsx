@@ -7,7 +7,7 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 const API = axios.create({ 
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api' 
+  baseURL: import.meta.env.VITE_API_URL || 'https://e-courtflow-backend.onrender.com/api'
 });
 
 /**
